@@ -20,39 +20,42 @@
 
 <script>
 // Set the date we're counting down to
-var countDownDate = new Date().getTime() + 60*60*1000;
-
-
+var countDownDate = 60*60*1000; // ms
+var pause = false;
+function restart_timer(){
+  countDownDate = 60*60*1000;
+  document.getElementById("demo").innerHTML = 'Restarting...';
+}
 // Update the count down every 1 second
-var x = setInterval(function() {
+var timer = setInterval(function() {
 
   // Get todays date and time
-  var now = new Date().getTime();
+  if(!pause){
+    countDownDate = countDownDate - 1000;
+    var minutes = Math.floor((countDownDate % (1000 * 60 * 60)) / (1000 * 60));
+    var seconds = Math.floor((countDownDate % (1000 * 60)) / 1000);
 
-  // Find the distance between now an the count down date
-  var distance = countDownDate - now;
+    // Display the result in the element with id="demo"
+    document.getElementById("demo").innerHTML = "Time left: "+
+    minutes + "m " + seconds + "s ";
 
-  // Time calculations for days, hours, minutes and seconds
-  var days = Math.floor(distance / (1000 * 60 * 60 * 24));
-  var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-  var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-  var seconds = Math.floor((distance % (1000 * 60)) / 1000);
-
-  // Display the result in the element with id="demo"
-  document.getElementById("demo").innerHTML = "Time left: "+
-  minutes + "m " + seconds + "s ";
-
-  // If the count down is finished, write some text 
-  if (distance < 0) {
-    clearInterval(x);
-    document.getElementById("demo").innerHTML = "Time for a break!";
+    // If the count down is finished, write some text
+    if (distance < 0) {
+      clearInterval(timer);
+      document.getElementById("demo").innerHTML = "Time for a break!";
+    }
   }
 }, 1000);
 
 
 </script>
 
+<button id="pause_btn" onclick="document.getElementById('pause_btn').innerHTML = (pause ? 'Pause': 'Resume');pause = !pause;" style="font-size:200%;">Pause</button>
+<button id="restart_btn" onclick="restart_timer();" style="font-size:200%;">Restart</button>
 
+<br>
+<br>
+<a target="_blank" href="https://twitter.com/intent/tweet?text=I%20have%20shut%20up%20and%20wrote%21%20https%3A%2F%2Fwww.shutupand.net%2F&source=clicktotweet&related=clicktotweet">Tweet about this</a>
 </center>
 </body>
 

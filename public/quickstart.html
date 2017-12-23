@@ -21,9 +21,7 @@
 </head>
 <body><center>
 <h1>Shut up and&nbsp;&nbsp;
-  <select style="display:inline;font-size:100%;">
-    <option></option>
-
+  <select style="display:inline;font-size:100%;" id="activity_select">
     <option>write</option>
     <option>read</option>
     <option>code</option>
@@ -54,11 +52,17 @@ var timer = setInterval(function() {
     var seconds = Math.floor((countDownDate % (1000 * 60)) / 1000);
 
     // Display the result in the element with id="demo"
-    document.getElementById("demo").innerHTML = "Time left: "+
-    minutes + "m " + seconds + "s ";
+    document.getElementById("demo").innerHTML = "Time left: "+minutes + "m " + seconds + "s";
+
+    howlong_time = 60*60*1000 - countDownDate;
+    var howlong_minutes = Math.floor((howlong_time % (1000 * 60 * 60)) / (1000 * 60));
+    var howlong_seconds = Math.floor((howlong_time % (1000 * 60)) / 1000);
+    howlong_str = howlong_minutes + "m " + howlong_seconds + "s ";
+
+    document.getElementById("tweet_link").href = "https://twitter.com/intent/tweet?text=I%20managed%20to%20shut%20up%20and%20"+document.getElementById("activity_select").value+" for "+howlong_str+"%21%20https%3A%2F%2Fwww.shutupand.net%2F&source=clicktotweet&related=clicktotweet";
 
     // If the count down is finished, write some text
-    if (distance < 0) {
+    if (countDownDate < 0) {
       clearInterval(timer);
       document.getElementById("demo").innerHTML = "Time for a break!";
     }
@@ -68,12 +72,12 @@ var timer = setInterval(function() {
 
 </script>
 
-<button id="pause_btn" onclick="document.getElementById('pause_btn').innerHTML = (pause ? 'Pause': 'Resume');pause = !pause;" style="font-size:200%;">Pause</button>
-<button id="restart_btn" onclick="restart_timer();" style="font-size:200%;">Restart</button>
+<button id="pause_btn" onclick="document.getElementById('pause_btn').innerHTML = (pause ? 'Pause': 'Resume');pause = !pause;" style="font-size:200%;">I got distracted 😭</button>
+<button id="restart_btn" onclick="restart_timer();" style="font-size:200%;">Restart ♻️</button>
 
 <br>
 <br>
-<a target="_blank" href="https://twitter.com/intent/tweet?text=I%20have%20shut%20up%20and%20wrote%21%20https%3A%2F%2Fwww.shutupand.net%2F&source=clicktotweet&related=clicktotweet">Tweet about this</a>
+<a id="tweet_link" target="_blank" href="https://twitter.com/intent/tweet?text=I%20have%20shut%20up%20and%20wrote%21%20https%3A%2F%2Fwww.shutupand.net%2F&source=clicktotweet&related=clicktotweet">Tweet about this</a>
 </center>
 </body>
 

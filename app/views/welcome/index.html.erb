@@ -1,0 +1,72 @@
+<center>
+<h1>Shut up and&nbsp;&nbsp;
+<select style="display:inline;font-size:100%;" id="activity_select">
+  <option>write</option>
+  <option>read</option>
+  <option>code</option>
+  <option>study</option>
+</select>
+
+</h1>
+<div><img src="pomodoro_timer.jpg"></div>
+
+
+<p id="timer" style="font-size:200%;"></p>
+
+<script>
+// Set the date we're counting down to
+var countDownDate = 60*60*1000; // ms
+var pause = false;
+function restart_timer(){
+countDownDate = 60*60*1000;
+document.getElementById("timer").innerHTML = 'Restarting...';
+}
+// Update the count down every 1 second
+var timer = setInterval(function() {
+
+// Get todays date and time
+if(!pause){
+  countDownDate = countDownDate - 1000;
+  var minutes = Math.floor((countDownDate % (1000 * 60 * 60)) / (1000 * 60));
+  var seconds = Math.floor((countDownDate % (1000 * 60)) / 1000);
+
+  // Display the result in the element with id="timer"
+  document.getElementById("timer").innerHTML = "Time left: "+minutes + "m " + seconds + "s";
+
+  howlong_time = 60*60*1000 - countDownDate;
+  var howlong_minutes = Math.floor((howlong_time % (1000 * 60 * 60)) / (1000 * 60));
+  var howlong_seconds = Math.floor((howlong_time % (1000 * 60)) / 1000);
+  howlong_str = howlong_minutes + "m " + howlong_seconds + "s ";
+  var activity = document.getElementById("activity_select").value;
+  document.getElementById("tweet_link").href = "https://twitter.com/intent/tweet?text=I%20managed%20to%20shut%20up%20and%20"+activity+" for "+howlong_str+"%21%20https%3A%2F%2Fwww.shutupand.net%2F%20%23shutupand"+activity+"&source=clicktotweet&related=clicktotweet";
+
+  // If the count down is finished, write some text
+  if (countDownDate < 0) {
+    clearInterval(timer);
+    document.getElementById("timer").innerHTML = "Time for a break!";
+  }
+}
+}, 1000);
+
+
+</script>
+
+<button id="pause_btn" onclick="document.getElementById('pause_btn').innerHTML = (pause ? 'I got distracted 😭': 'Resume 👍');pause = !pause;" style="font-size:200%;">I got distracted 😭</button>
+<button id="restart_btn" onclick="restart_timer();" style="font-size:200%;">Restart ♻️</button>
+
+
+
+<h2>
+<a id="tweet_link" target="_blank" href="https://twitter.com/intent/tweet?text=I%20have%20shut%20up%20and%20wrote%21%20https%3A%2F%2Fwww.shutupand.net%2F&source=clicktotweet&related=clicktotweet"><img src="circle-twitter-512.png" width="45" /></a>
+</h2>
+
+<br>
+<h2>Checkins</h2>
+
+<%= render 'checkins/form', checkin: @checkin %>
+<hr width="200">
+<div id="last_checkins">
+  <%= render :partial => 'checkins/checkin', collection: @checkins.reverse %>
+</div>
+
+</center>

@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Shut up and {write|read|code|study}</title>
+    <%= csrf_meta_tags %>
+
+    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.form/4.2.2/jquery.form.min.js"></script>
+
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-3519594-9"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'UA-3519594-9');
+    </script>
+
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="@aand314">
+    <meta name="twitter:title" content="Shut Up And Write!">
+    <meta name="twitter:description" content="Pomodoro to help you concentrate and write, on-line 24/7">
+    <meta name="twitter:image" content="https://shutupand.net/pomodoro_timer.jpg">
+    <meta name="twitter:image:alt" content="ShutUpAnd.net">
+
+  </head>
+
+  <body>
+    <%= yield %>
+  </body>
+</html>

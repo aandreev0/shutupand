@@ -6,7 +6,7 @@ class CheckinsController < ApplicationController
   def index
     @checkins = Checkin.all
     @jquery = false
-    if !request.xhr?
+    if request.xhr?
       render :layout => false
       @jquery = true
     end

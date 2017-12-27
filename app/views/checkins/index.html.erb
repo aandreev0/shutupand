@@ -20,5 +20,7 @@
 </table>
 
 <% else %>
+  <table>
   <%= render :partial => 'checkins/checkin', collection: @checkins.reverse %>
+  </table>
 <% end %>

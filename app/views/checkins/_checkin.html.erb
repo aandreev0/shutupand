@@ -1,1 +1,5 @@
-<i><%= checkin.created_at %></i> | <b><%= checkin.line %></b><br>
+
+<tr>
+  <td><i><%= checkin.created_at.to_formatted_s(:short) %></i> | </td>
+  <td><b><%= checkin.line %></b><br></td>
+</tr>

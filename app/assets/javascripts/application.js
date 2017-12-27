@@ -25,3 +25,12 @@
      return false;
    });
  });
+
+ function update() {
+   console.log('update::');
+   $.get("checkins/", function(data) {
+     $("#last_checkins").html(data).hide().fadeIn(500);
+     window.setTimeout(update, 10000);
+   });
+ }
+update();

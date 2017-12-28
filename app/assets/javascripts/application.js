@@ -34,3 +34,47 @@
    });
  }
 update();
+
+
+// Set the date we're counting down to
+var countDownDate = 60*60*1000; // ms
+var pause = false;
+function restart_timer(){
+  countDownDate = 60*60*1000;
+  document.getElementById("timer").innerHTML = 'Restarting...';
+  pause = true;
+  toggle_pause();
+}
+function toggle_pause(){
+  document.getElementById('pause_btn').innerHTML = (pause ? 'I got distracted 😭': 'Resume 👍');pause = !pause;
+}
+// Update the count down every 1 second
+var timer = setInterval(function() {
+
+// Get todays date and time
+if(!pause){
+  countDownDate = countDownDate - 1000;
+  var minutes = Math.floor((countDownDate % (1000 * 60 * 60)) / (1000 * 60));
+  var seconds = Math.floor((countDownDate % (1000 * 60)) / 1000);
+
+  // Display the result in the element with id="timer"
+  var timeLeft = minutes + "m " + seconds + "s";
+  var activity = document.getElementById("activity_select").value;
+
+  document.getElementById("timer").innerHTML = "Time left: "+timeLeft;
+  window.document.title = timeLeft + " Shut up and "+activity;
+  howlong_time = 60*60*1000 - countDownDate;
+  var howlong_minutes = Math.floor((howlong_time % (1000 * 60 * 60)) / (1000 * 60));
+  var howlong_seconds = Math.floor((howlong_time % (1000 * 60)) / 1000);
+  howlong_str = howlong_minutes + "m " + howlong_seconds + "s ";
+  document.getElementById("tweet_link").href = "https://twitter.com/intent/tweet?text=I%20managed%20to%20shut%20up%20and%20"+activity+" for "+howlong_str+"%21%20https%3A%2F%2Fwww.shutupand.net%2F%20%23shutupand"+activity+"&source=clicktotweet&related=clicktotweet";
+
+  // If the count down is finished, write some text
+  if (countDownDate < 2000) {
+    clearInterval(timer);
+    document.getElementById("timer").innerHTML = "Time for a break!";
+  }
+}else{ // if paused
+    $('timer').hide();
+}
+}, 1000);

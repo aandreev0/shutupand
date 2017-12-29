@@ -67,10 +67,15 @@ if(!pause){
 
   document.getElementById("timer").innerHTML = "Time left: "+timeLeft;
   window.document.title = timeLeft + " Shut up and "+activity;
-  howlong_time = 60*60*1000 - countDownDate;
+  e = document.getElementById('activity_length_select');
+  a = e.options[e.selectedIndex].value*60*1000;
+  howlong_time = a - countDownDate;
+  var howlong_hours = Math.floor((howlong_time % (1000 * 60 * 60*60)) / (1000 * 60*60));
   var howlong_minutes = Math.floor((howlong_time % (1000 * 60 * 60)) / (1000 * 60));
   var howlong_seconds = Math.floor((howlong_time % (1000 * 60)) / 1000);
-  howlong_str = howlong_minutes + "m " + howlong_seconds + "s ";
+  howlong_str = '';
+  if(howlong_hours > 0){howlong_str = howlong_hours+ 'h '}
+  howlong_str = howlong_str + howlong_minutes + "m " + howlong_seconds + "s ";
   document.getElementById("tweet_link").href = "https://twitter.com/intent/tweet?text=I%20managed%20to%20shut%20up%20and%20"+activity+" for "+howlong_str+"%21%20https%3A%2F%2Fwww.shutupand.net%2F%20%23shutupand"+activity+"&source=clicktotweet&related=clicktotweet";
 
   // If the count down is finished, write some text

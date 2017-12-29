@@ -39,8 +39,9 @@ update();
 // Set the date we're counting down to
 var countDownDate = 60*60*1000; // ms
 var pause = false;
-function restart_timer(){
-  countDownDate = 60*60*1000;
+function restart_timer(c){
+  e = document.getElementById('activity_length_select');
+  countDownDate = e.options[e.selectedIndex].value*60*1000;
   document.getElementById("timer").innerHTML = 'Restarting...';
   pause = true;
   toggle_pause();
@@ -54,11 +55,14 @@ var timer = setInterval(function() {
 // Get todays date and time
 if(!pause){
   countDownDate = countDownDate - 1000;
+  var hours = Math.floor((countDownDate % (1000 * 60 * 60*60)) / (1000 * 60*60));
   var minutes = Math.floor((countDownDate % (1000 * 60 * 60)) / (1000 * 60));
   var seconds = Math.floor((countDownDate % (1000 * 60)) / 1000);
 
   // Display the result in the element with id="timer"
-  var timeLeft = minutes + "m " + seconds + "s";
+  var timeLeft = '';
+  if(hours>0){timeLeft=hours + ":"}
+  var timeLeft =  timeLeft + minutes + ":" + seconds + "";
   var activity = document.getElementById("activity_select").value;
 
   document.getElementById("timer").innerHTML = "Time left: "+timeLeft;

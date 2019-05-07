@@ -19,6 +19,7 @@ for
 
 
 <p id="timer" style="font-size:200%;"></p>
+<p id="elapsedTime" style="font-size:200%;"></p>
 
 <script>
 
@@ -38,12 +39,14 @@ for
 <a href="mailto:about@shutupand.net">about@shutupand.net</a> | <a href="https://twitter.com/shutupand_net">twitter/shutupand_net</a>
 
 <br>
-<h2>Checkins</h2>
+<iframe src="https://deadsimplechat.com/yNtpkBhaP" style="width: 100%; height: 500px;">
 
-<%= render 'checkins/form', checkin: @checkin %>
+<!--<h2>Checkins</h2>
+
+<% #= render 'checkins/form', checkin: @checkin %>
 <hr width="200">
 <div id="last_checkins">
-  <%= render :partial => 'checkins/checkin', collection: @checkins.reverse %>
-</div>
+  <% #= render :partial => 'checkins/checkin', collection: @checkins.reverse %>
+</div>-->
 
 </center>
